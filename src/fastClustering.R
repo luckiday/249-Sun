@@ -1,14 +1,12 @@
 rm(list = ls())
 library('igraph')
-setwd(getwd())
-edges = read.csv("../edges_clean.txt", header = FALSE, sep = "\t")
-edges = edges + 1 
+edges = read.csv("../data/top5CommunitiesEdges.csv", header = FALSE, sep = ",")
 # read communities
-con  <- file("../top_5_communities.txt", open = "r")
+con  <- file("../data/top5Communities.txt", open = "r")
 communities <- list()
 while (length(oneLine <- readLines(con, n = 1, warn = FALSE)) > 0) {
-  myVector <- (strsplit(oneLine, "\t"))
-  myVector <- list(as.numeric(myVector[[1]]) + 1)
+  myVector <- (strsplit(oneLine, ","))
+  myVector <- list(as.numeric(myVector[[1]]))
   communities <- c(communities,myVector)
 } 
 close(con)
