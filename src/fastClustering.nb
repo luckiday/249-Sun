@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     17251,        541]
-NotebookOptionsPosition[     15903,        491]
-NotebookOutlinePosition[     16264,        507]
-CellTagsIndexPosition[     16221,        504]
+NotebookDataLength[     21911,        643]
+NotebookOptionsPosition[     20261,        584]
+NotebookOutlinePosition[     20621,        600]
+CellTagsIndexPosition[     20578,        597]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -27,10 +27,12 @@ Cell[BoxData[
 
 Cell[BoxData["\<\"/Users/yunqiguo/Document/CS249_2/project/249-Sun/src\"\>"], \
 "Output",
- CellChangeTimes->{3.705540776943944*^9, 3.705540892877816*^9, 
-  3.705540931577796*^9, 3.705702552028626*^9, 3.7057038131655293`*^9, 
-  3.705704695240575*^9, 3.705708013439104*^9, 3.705708845741802*^9, 
-  3.7057625759257307`*^9}]
+ CellChangeTimes->{
+  3.705540776943944*^9, 3.705540892877816*^9, 3.705540931577796*^9, 
+   3.705702552028626*^9, 3.7057038131655293`*^9, 3.705704695240575*^9, 
+   3.705708013439104*^9, 3.705708845741802*^9, 3.7057625759257307`*^9, {
+   3.705766420407867*^9, 3.705766432363739*^9}, 3.705766759194072*^9, 
+   3.705768508748369*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -292,205 +294,296 @@ Cell[CellGroupData[{
 Cell["r+mathematica", "Subchapter",
  CellChangeTimes->{{3.7057626263784857`*^9, 3.705762630932722*^9}}],
 
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"communitiesFile", "=", 
+   RowBox[{"FileNames", "[", "\"\<../communities/*.txt\>\"", "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.705767257126587*^9, 3.705767292016708*^9}}],
+
 Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"clustering", "=", 
-   RowBox[{"Import", "[", 
-    RowBox[{"\"\<../communities/infomap.txt\>\"", ",", "\"\<Data\>\""}], 
-    "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"clustering", "=", 
-   RowBox[{"ToExpression", "/@", 
-    RowBox[{"StringSplit", "[", 
-     RowBox[{"clustering", ",", "\"\< \>\""}], "]"}]}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"communities", "=", "clustering"}], ";"}], "\n", 
- RowBox[{"Length", "@", "communities"}], "\n", 
- RowBox[{
-  RowBox[{"communityDistanceMatrix", "=", 
-   RowBox[{"Table", "[", 
-    RowBox[{
-     RowBox[{"N", "@", 
-      RowBox[{"Mean", "@", 
-       RowBox[{"Flatten", "@", 
-        RowBox[{"distance", "[", 
-         RowBox[{"[", 
-          RowBox[{
-           RowBox[{"vDic", "/@", 
-            RowBox[{"communities", "[", 
-             RowBox[{"[", "i", "]"}], "]"}]}], ",", 
-           RowBox[{"vDic", "/@", 
-            RowBox[{"communities", "[", 
-             RowBox[{"[", "j", "]"}], "]"}]}]}], "]"}], "]"}]}]}]}], ",", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", 
-       RowBox[{"Length", "@", "communities"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"j", ",", 
-       RowBox[{"Length", "@", "communities"}]}], "}"}]}], "]"}]}], 
-  ";"}], "\n", 
- RowBox[{
-  RowBox[{"nearests", "=", 
+  RowBox[{"results", "=", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"For", "[", 
+  RowBox[{
+   RowBox[{"i", "=", "1"}], ",", 
+   RowBox[{"i", "\[LessEqual]", 
+    RowBox[{"Length", "@", "communitiesFile"}]}], ",", 
+   RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{
+    RowBox[{"Print", "[", "i", "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"clustering", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{
+       RowBox[{"communitiesFile", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", "\"\<Data\>\""}], "]"}]}], ";", 
+    RowBox[{"clustering", "=", 
+     RowBox[{"ToExpression", "/@", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{"clustering", ",", "\"\< \>\""}], "]"}]}]}], ";", 
+    RowBox[{"communities", "=", "clustering"}], ";", 
+    RowBox[{"len1", "=", 
+     RowBox[{"Length", "@", "communities"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"time1", "=", 
      RowBox[{
-      RowBox[{"Position", "[", 
-       RowBox[{"#", ",", 
-        RowBox[{"Min", "[", "#", "]"}]}], "]"}], "[", 
-      RowBox[{"[", 
-       RowBox[{"1", ",", "1"}], "]"}], "]"}], "&"}], "/@", " ", 
-    RowBox[{"communityDistanceMatrix", "[", 
-     RowBox[{"[", 
-      RowBox[{
-       RowBox[{"6", ";;"}], ",", 
-       RowBox[{"1", ";;", "5"}]}], "]"}], "]"}]}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"communitiesFinal", "=", 
-   RowBox[{"Table", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"Join", "[", 
-      RowBox[{
-       RowBox[{"communities", "[", 
-        RowBox[{"[", "i", "]"}], "]"}], ",", 
-       RowBox[{"Flatten", "@", " ", 
-        RowBox[{"communities", "[", 
-         RowBox[{"[", " ", 
+      RowBox[{"Timing", "[", 
+       RowBox[{
+        RowBox[{"communityDistanceMatrix", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"N", "@", 
+            RowBox[{"Mean", "@", 
+             RowBox[{"Flatten", "@", 
+              RowBox[{"distance", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"vDic", "/@", 
+                  RowBox[{"communities", "[", 
+                   RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+                 RowBox[{"vDic", "/@", 
+                  RowBox[{"communities", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}]}]}], "]"}], "]"}]}]}]}], 
+           ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", 
+             RowBox[{"Length", "@", "communities"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", 
+             RowBox[{"Length", "@", "communities"}]}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"nearests", "=", 
+         RowBox[{
           RowBox[{
            RowBox[{
             RowBox[{"Position", "[", 
-             RowBox[{"nearests", ",", "i"}], "]"}], "[", 
+             RowBox[{"#", ",", 
+              RowBox[{"Min", "[", "#", "]"}]}], "]"}], "[", 
             RowBox[{"[", 
-             RowBox[{"All", ",", "1"}], "]"}], "]"}], " ", "+", "5"}], "]"}], 
-         "]"}]}]}], "]"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", "5"}], "}"}]}], "]"}]}], ";"}], "\n", 
- RowBox[{"purity", "[", 
-  RowBox[{"communitiesFinal", ",", "top5"}], "]"}]}], "Input",
- CellChangeTimes->{{3.705763802398588*^9, 3.705763810424364*^9}}],
+             RowBox[{"1", ",", "1"}], "]"}], "]"}], "&"}], "/@", " ", 
+          RowBox[{"communityDistanceMatrix", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"6", ";;"}], ",", 
+             RowBox[{"1", ";;", "5"}]}], "]"}], "]"}]}]}], ";", 
+        RowBox[{"communitiesFinal", "=", 
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Join", "[", 
+            RowBox[{
+             RowBox[{"communities", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", 
+             RowBox[{"Flatten", "@", " ", 
+              RowBox[{"communities", "[", 
+               RowBox[{"[", " ", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Position", "[", 
+                   RowBox[{"nearests", ",", "i"}], "]"}], "[", 
+                  RowBox[{"[", 
+                   RowBox[{"All", ",", "1"}], "]"}], "]"}], " ", "+", "5"}], 
+                "]"}], "]"}]}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "5"}], "}"}]}], "]"}]}], ";", 
+        RowBox[{"p1", "=", 
+         RowBox[{"purity", "[", 
+          RowBox[{"communitiesFinal", ",", "top5"}], "]"}]}], ";"}], 
+       "\[IndentingNewLine]", "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"time2", "=", 
+     RowBox[{
+      RowBox[{"Timing", "[", 
+       RowBox[{
+        RowBox[{"g2", "=", 
+         RowBox[{"WeightedAdjacencyGraph", "[", 
+          RowBox[{"1", "/", "communityDistanceMatrix"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"communities4", "=", 
+         RowBox[{"FindGraphCommunities", "[", 
+          RowBox[{"g2", ",", 
+           RowBox[{"Method", "\[Rule]", "\"\<Spectral\>\""}]}], "]"}]}], ";", 
+        
+        RowBox[{"len2", "=", 
+         RowBox[{"Length", "@", "communities4"}]}], ";", 
+        RowBox[{"c4Size", "=", 
+         RowBox[{"Length", "@", "communities4"}]}], ";", 
+        RowBox[{"distance2", "=", 
+         RowBox[{"GraphDistanceMatrix", "[", "g2", "]"}]}], ";", 
+        RowBox[{"vDic2", "=", " ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Association", "@", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"#", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], "\[Rule]", "i"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", 
+                RowBox[{"Length", "@", "#"}]}], "}"}]}], "]"}]}], "&"}], "@", 
+          
+          RowBox[{"VertexList", "[", "g2", "]"}]}]}], ";", 
+        RowBox[{"communityDistanceMatrix2", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"N", "@", 
+            RowBox[{"Mean", "@", 
+             RowBox[{"Flatten", "@", 
+              RowBox[{"distance2", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                 RowBox[{"vDic2", "/@", 
+                  RowBox[{"communities4", "[", 
+                   RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+                 RowBox[{"vDic2", "/@", 
+                  RowBox[{"communities4", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}]}]}], "]"}], "]"}]}]}]}], 
+           ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "c4Size"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", "c4Size"}], "}"}]}], "]"}]}], ";", 
+        RowBox[{"nearests", "=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"Position", "[", 
+             RowBox[{"#", ",", 
+              RowBox[{"Min", "[", "#", "]"}]}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ",", "1"}], "]"}], "]"}], "&"}], "/@", " ", 
+          RowBox[{"communityDistanceMatrix2", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"6", ";;"}], ",", 
+             RowBox[{"1", ";;", "5"}]}], "]"}], "]"}]}]}], ";", 
+        RowBox[{"communities5", "=", 
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Join", "[", 
+            RowBox[{
+             RowBox[{"communities4", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", 
+             RowBox[{"Flatten", "@", " ", 
+              RowBox[{"communities4", "[", 
+               RowBox[{"[", " ", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Position", "[", 
+                   RowBox[{"nearests", ",", "i"}], "]"}], "[", 
+                  RowBox[{"[", 
+                   RowBox[{"All", ",", "1"}], "]"}], "]"}], " ", "+", "5"}], 
+                "]"}], "]"}]}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "5"}], "}"}]}], "]"}]}], ";", 
+        RowBox[{"p2", "=", 
+         RowBox[{"purity", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"Flatten", "[", 
+              RowBox[{"communities", "[", 
+               RowBox[{"[", "#", "]"}], "]"}], "]"}], "&"}], "/@", 
+            "communities5"}], ",", "top5"}], "]"}]}], ";"}], 
+       "\[IndentingNewLine]", "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"AppendTo", "[", 
+     RowBox[{"results", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"communitiesFile", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", "len1", ",", "p1", ",", "len2", 
+        ",", "p2", ",", "time1", ",", "time2"}], "}"}]}], "]"}]}]}], 
+  "\[IndentingNewLine]", "]"}]}], "Input",
+ CellChangeTimes->{{3.705763802398588*^9, 3.705763810424364*^9}, {
+   3.7057666590048943`*^9, 3.705766664586939*^9}, {3.705766721170706*^9, 
+   3.705766753525455*^9}, {3.705766859708619*^9, 3.705766862086258*^9}, {
+   3.705767062526565*^9, 3.70576707892258*^9}, 3.705767227761681*^9, {
+   3.705767348504632*^9, 3.705767573612712*^9}, {3.705767661647526*^9, 
+   3.7057676965137453`*^9}, {3.7057678588105*^9, 3.70576786744066*^9}, {
+   3.705767920489614*^9, 3.7057680094435053`*^9}}],
 
-Cell[BoxData["1829"], "Output",
- CellChangeTimes->{3.7057638144713583`*^9}],
+Cell[CellGroupData[{
 
-Cell[BoxData["0.46633732086718654`"], "Output",
- CellChangeTimes->{3.705763867718479*^9}]
+Cell[BoxData["1"], "Print",
+ CellChangeTimes->{
+  3.705767576799707*^9, {3.705767987948813*^9, 3.7057680131475353`*^9}}],
+
+Cell[BoxData["2"], "Print",
+ CellChangeTimes->{
+  3.705767576799707*^9, {3.705767987948813*^9, 3.705768026649626*^9}}],
+
+Cell[BoxData["3"], "Print",
+ CellChangeTimes->{
+  3.705767576799707*^9, {3.705767987948813*^9, 3.7057680016206503`*^9}, 
+   3.705768098705921*^9}],
+
+Cell[BoxData["4"], "Print",
+ CellChangeTimes->{
+  3.705767576799707*^9, {3.705767987948813*^9, 3.7057680016206503`*^9}, 
+   3.7057682038597918`*^9}],
+
+Cell[BoxData["5"], "Print",
+ CellChangeTimes->{
+  3.705767576799707*^9, {3.705767987948813*^9, 3.7057680016206503`*^9}, 
+   3.7057682130931873`*^9}],
+
+Cell[BoxData["6"], "Print",
+ CellChangeTimes->{
+  3.705767576799707*^9, {3.705767987948813*^9, 3.7057680016206503`*^9}, 
+   3.705768222520031*^9}],
+
+Cell[BoxData["7"], "Print",
+ CellChangeTimes->{
+  3.705767576799707*^9, {3.705767987948813*^9, 3.7057680016206503`*^9}, 
+   3.70576823135526*^9}],
+
+Cell[BoxData["8"], "Print",
+ CellChangeTimes->{
+  3.705767576799707*^9, {3.705767987948813*^9, 3.7057680016206503`*^9}, 
+   3.7057682391402407`*^9}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
+Cell[BoxData[
  RowBox[{
-  RowBox[{"g2", "=", 
-   RowBox[{"WeightedAdjacencyGraph", "[", 
-    RowBox[{"1", "/", "communityDistanceMatrix"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"communities4", "=", 
-   RowBox[{"FindGraphCommunities", "[", 
-    RowBox[{"g2", ",", 
-     RowBox[{"Method", "\[Rule]", "\"\<Spectral\>\""}]}], "]"}]}], 
-  ";"}], "\n", 
- RowBox[{"Length", "@", "communities4"}], "\n", 
- RowBox[{
-  RowBox[{"c4Size", "=", 
-   RowBox[{"Length", "@", "communities4"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"distance2", "=", 
-   RowBox[{"GraphDistanceMatrix", "[", "g2", "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"vDic2", "=", " ", 
+  RowBox[{"results", "[", 
+   RowBox[{"[", 
+    RowBox[{"All", ",", "1"}], "]"}], "]"}], "=", 
+  RowBox[{"StringDrop", "[", 
    RowBox[{
-    RowBox[{
-     RowBox[{"Association", "@", 
-      RowBox[{"Table", "[", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"#", "[", 
-          RowBox[{"[", "i", "]"}], "]"}], "\[Rule]", "i"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"i", ",", 
-          RowBox[{"Length", "@", "#"}]}], "}"}]}], "]"}]}], "&"}], "@", 
-    RowBox[{"VertexList", "[", "g2", "]"}]}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"communityDistanceMatrix2", "=", 
-   RowBox[{"Table", "[", 
-    RowBox[{
-     RowBox[{"N", "@", 
-      RowBox[{"Mean", "@", 
-       RowBox[{"Flatten", "@", 
-        RowBox[{"distance2", "[", 
-         RowBox[{"[", 
-          RowBox[{
-           RowBox[{"vDic2", "/@", 
-            RowBox[{"communities4", "[", 
-             RowBox[{"[", "i", "]"}], "]"}]}], ",", 
-           RowBox[{"vDic2", "/@", 
-            RowBox[{"communities4", "[", 
-             RowBox[{"[", "j", "]"}], "]"}]}]}], "]"}], "]"}]}]}]}], ",", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", "c4Size"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"j", ",", "c4Size"}], "}"}]}], "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"nearests", "=", 
-   RowBox[{
-    RowBox[{
+    RowBox[{"StringDrop", "[", 
      RowBox[{
-      RowBox[{"Position", "[", 
-       RowBox[{"#", ",", 
-        RowBox[{"Min", "[", "#", "]"}]}], "]"}], "[", 
-      RowBox[{"[", 
-       RowBox[{"1", ",", "1"}], "]"}], "]"}], "&"}], "/@", " ", 
-    RowBox[{"communityDistanceMatrix2", "[", 
-     RowBox[{"[", 
-      RowBox[{
-       RowBox[{"6", ";;"}], ",", 
-       RowBox[{"1", ";;", "5"}]}], "]"}], "]"}]}]}], ";"}], "\n", 
+      RowBox[{"results", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", "15"}], "]"}], ",", 
+    RowBox[{"-", "4"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7057682706864*^9, 3.705768271358343*^9}, {
+  3.7057683151047707`*^9, 3.705768408505336*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"fast_greedy\"\>", ",", "\<\"infomap\"\>", 
+   ",", "\<\"label_prop\"\>", ",", "\<\"leading_eigen\"\>", 
+   ",", "\<\"louvain\"\>", ",", "\<\"optimal\"\>", ",", "\<\"springlass\"\>", 
+   ",", "\<\"walktrap\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.705768271963881*^9, {3.705768328197448*^9, 3.705768409110879*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
  RowBox[{
-  RowBox[{"communities5", "=", 
-   RowBox[{"Table", "[", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"Join", "[", 
-      RowBox[{
-       RowBox[{"communities4", "[", 
-        RowBox[{"[", "i", "]"}], "]"}], ",", 
-       RowBox[{"Flatten", "@", " ", 
-        RowBox[{"communities4", "[", 
-         RowBox[{"[", " ", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"Position", "[", 
-             RowBox[{"nearests", ",", "i"}], "]"}], "[", 
-            RowBox[{"[", 
-             RowBox[{"All", ",", "1"}], "]"}], "]"}], " ", "+", "5"}], "]"}], 
-         "]"}]}]}], "]"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", "5"}], "}"}]}], "]"}]}], ";"}], "\n", 
- RowBox[{"purity", "[", 
-  RowBox[{
-   RowBox[{
-    RowBox[{
-     RowBox[{"Flatten", "[", 
-      RowBox[{"communities", "[", 
-       RowBox[{"[", "#", "]"}], "]"}], "]"}], "&"}], "/@", "communities5"}], 
-   ",", "top5"}], "]"}]}], "Input",
- CellChangeTimes->{{3.705763649396291*^9, 3.705763649995632*^9}, {
-  3.705763690488371*^9, 3.705763708857465*^9}, {3.7057639575381107`*^9, 
-  3.705764002691235*^9}}],
-
-Cell[BoxData["46"], "Output",
- CellChangeTimes->{
-  3.705763673080144*^9, {3.705763714951194*^9, 3.70576373589517*^9}}],
-
-Cell[BoxData["0.5087576042134487`"], "Output",
- CellChangeTimes->{
-  3.705763673080144*^9, {3.705763714951194*^9, 3.705763741782145*^9}}]
-}, Open  ]]
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<result.csv\>\"", ",", "results"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.7057684172157907`*^9, 3.7057684677749853`*^9}}]
 }, Open  ]]
 },
 WindowSize->{769, 385},
-WindowMargins->{{218, Automatic}, {132, Automatic}},
+WindowMargins->{{214, Automatic}, {29, Automatic}},
 FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
 21, 2016)",
 StyleDefinitions->"Default.nb"
@@ -508,40 +601,49 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 165, 3, 32, "Input"],
-Cell[748, 27, 320, 5, 32, "Output"]
+Cell[748, 27, 420, 7, 32, "Output"]
 }, Open  ]],
-Cell[1083, 35, 1300, 37, 132, "Input"],
-Cell[2386, 74, 177, 3, 32, "Input"],
-Cell[2566, 79, 125, 2, 32, "Input"],
-Cell[2694, 83, 172, 4, 32, "Input"],
-Cell[2869, 89, 236, 5, 32, "Input"],
-Cell[3108, 96, 527, 15, 32, "Input"],
+Cell[1183, 37, 1300, 37, 132, "Input"],
+Cell[2486, 76, 177, 3, 32, "Input"],
+Cell[2666, 81, 125, 2, 32, "Input"],
+Cell[2794, 85, 172, 4, 32, "Input"],
+Cell[2969, 91, 236, 5, 32, "Input"],
+Cell[3208, 98, 527, 15, 32, "Input"],
 Cell[CellGroupData[{
-Cell[3660, 115, 199, 3, 63, "Subchapter"],
-Cell[3862, 120, 361, 7, 32, "Input"],
+Cell[3760, 117, 199, 3, 63, "Subchapter"],
+Cell[3962, 122, 361, 7, 32, "Input"],
 Cell[CellGroupData[{
-Cell[4248, 131, 234, 4, 32, "Input"],
-Cell[4485, 137, 254, 4, 32, "Output"]
+Cell[4348, 133, 234, 4, 32, "Input"],
+Cell[4585, 139, 254, 4, 32, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4776, 146, 4363, 130, 516, "Input"],
-Cell[9142, 278, 73, 1, 32, "Output"],
-Cell[9218, 281, 73, 1, 32, "Output"],
-Cell[9294, 284, 88, 1, 32, "Output"]
+Cell[4876, 148, 4363, 130, 495, "Input"],
+Cell[9242, 280, 73, 1, 32, "Output"],
+Cell[9318, 283, 73, 1, 32, "Output"],
+Cell[9394, 286, 88, 1, 32, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9431, 291, 103, 1, 63, "Subchapter"],
+Cell[9531, 293, 103, 1, 63, "Subchapter"],
+Cell[9637, 296, 214, 5, 32, "Input"],
 Cell[CellGroupData[{
-Cell[9559, 296, 2541, 74, 285, "Input"],
-Cell[12103, 372, 75, 1, 32, "Output"],
-Cell[12181, 375, 89, 1, 32, "Output"]
+Cell[9876, 305, 8085, 200, 852, "Input"],
+Cell[CellGroupData[{
+Cell[17986, 509, 120, 2, 24, "Print"],
+Cell[18109, 513, 118, 2, 24, "Print"],
+Cell[18230, 517, 146, 3, 24, "Print"],
+Cell[18379, 522, 148, 3, 24, "Print"],
+Cell[18530, 527, 148, 3, 24, "Print"],
+Cell[18681, 532, 146, 3, 24, "Print"],
+Cell[18830, 537, 145, 3, 24, "Print"],
+Cell[18978, 542, 148, 3, 24, "Print"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[12307, 381, 3306, 98, 369, "Input"],
-Cell[15616, 481, 119, 2, 32, "Output"],
-Cell[15738, 485, 137, 2, 32, "Output"]
-}, Open  ]]
+Cell[19175, 551, 493, 14, 32, "Input"],
+Cell[19671, 567, 365, 7, 54, "Output"]
+}, Open  ]],
+Cell[20051, 577, 194, 4, 32, "Input"]
 }, Open  ]]
 }
 ]
